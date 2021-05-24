@@ -2,7 +2,10 @@ data_all <- list.files(path = (Datsource), pattern = "*.csv", full.names = TRUE)
   walk(read_csv) %>%                                            # Store all files in list
   bind_rows                                                       # Combine data sets into one data set 
 data_all
+Happiness_Data<-list.files(path=)
 
+
+dat <- list.files(path= "mocktest/Data/Happy", pattern="*.csv",full.names=T) 
 
 datpull<-function(x){
   library(tidyverse)

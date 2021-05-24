@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 I first try to make a function to load data and apply it below
 ```{r}
-Happy_data<-Data_l("/Data/Happy")
+Happy_data<-Data_Collating("Data/Happy")
 ```
 
 Here I create a texevier template to use in my directory
