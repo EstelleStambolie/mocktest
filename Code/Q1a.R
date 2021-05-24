@@ -95,20 +95,30 @@ barplotdat<-Happy_data %>%
   group_by(`Regional indicator`) %>% 
   summarise_at(vars(c(`Ladder score`,`Healthy life expectancy`)),~mean(.))
   
-  
-  
-bpl <-
-  Happy_data %>%
-  group_by(`Regional indicator`) %>%
-  # summarise(across(c(`Ladder score`, ends_with("whisker")),
-  # list(median), .names = "{col}.{fn}") )
-  summarise_at( vars(c(`Ladder score`, ends_with("whisker")) ), ~median(.))
+bparranged<- barplotdat %>% arrange(`Ladder score`)
 
+SA<-Happy_data %>%
+  select(c(`Regional indicator`, `Ladder score`,`Healthy life expectancy`,`Country name`)) %>% 
+  filter(`Country name`=='South Africa') %>% 
+  summarise_at(vars(c(`Ladder score`,`Healthy life expectancy`)),~mean(.))
+
+SA<- SA %>% 
+  mutate(`Regional indicator`="South Africa")  
+
+
+SA <- SA[, c('Regional indicator','Ladder score','Healthy life expectancy')]
+
+graph_data<- bind_rows(bparranged,SA) 
   
-  
-  
-  
-  
+graph2<- graph_data %>% ggplot() +
+  aes(y=`Ladder score`) 
+
+graph2+geom_bar()
+
+#take note of this from Nick
+geom_bar(aes(`Regional indicator`, y = Value, fill = Score), stat = "identity", position = "stack")
+
+graph2
 
 
 
