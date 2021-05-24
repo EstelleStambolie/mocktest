@@ -109,11 +109,17 @@ SA<- SA %>%
 SA <- SA[, c('Regional indicator','Ladder score','Healthy life expectancy')]
 
 graph_data<- bind_rows(bparranged,SA) 
-  
-graph2<- graph_data %>% ggplot() +
-  aes(y=`Ladder score`) 
 
-graph2+geom_bar()
+
+x.ordered <- factor(Regional indicator, levels=c("South Africa", all))
+
+  
+graph2<- graph_data %>% 
+ggplot() + geom_bar(aes(`Regional indicator`, y = `Ladder score`), stat = "identity", position = "stack") +
+  theme_bw()
+
+graph2
+graph2+geom_bar(aes(x=`Regional indicator``Ladder score`) )
 
 #take note of this from Nick
 geom_bar(aes(`Regional indicator`, y = Value, fill = Score), stat = "identity", position = "stack")
@@ -121,9 +127,10 @@ geom_bar(aes(`Regional indicator`, y = Value, fill = Score), stat = "identity", 
 graph2
 
 
+d <- ggplot(graph_data), aes('Regional indicator'))
 
-
-
+d + geom_bar(fill=)
+x, alpha, color, fill, linetype, size, weight
 
 
 
