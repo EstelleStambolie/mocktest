@@ -18,18 +18,17 @@ data_in <- list.files(Datsource, pattern="*.csv") %>%
 Data_load("Data/Happy/Happy_EastAsia")
 
 Data_l<-function(Datsource){
-  
+  library(readr)
+  library(purrr)
+  library(dplyr)
   read_func<-function(x){
-    library(readr)
-    library(purrr)
-    library(dplyr)
     read_func<-purrr::quietly(read_csv(x))
     read_func
   }
   
-  data_list <- list.files("Data/Happy", pattern="*.csv") %>% 
-    walk(read_func) %>% 
-    bind_rows()
+  dat <- list.files(Datsource, pattern="*.csv") %>% 
+    walk(~ read_func(.)) %>% 
+    df(bind_rows())
 
   dat
 }
